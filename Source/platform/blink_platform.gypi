@@ -677,6 +677,8 @@
       'image-decoders/ico/ICOImageDecoder.h',
       'image-decoders/jpeg/JPEGImageDecoder.cpp',
       'image-decoders/jpeg/JPEGImageDecoder.h',
+      'image-decoders/jpegxr/JPEGXRImageDecoder.cpp',
+      'image-decoders/jpegxr/JPEGXRImageDecoder.h',
       'image-decoders/png/PNGImageDecoder.cpp',
       'image-decoders/png/PNGImageDecoder.h',
       'image-decoders/webp/WEBPImageDecoder.cpp',

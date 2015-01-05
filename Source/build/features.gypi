@@ -71,6 +71,11 @@
           'ENABLE_WEB_AUDIO=1',
         ],
       }],
+      ['OS=="linux"', {
+        'feature_defines': [
+          'ENABLE_JPEGXR=1',
+        ],
+      }],
       ['use_default_render_theme==1', {
         'feature_defines': [
           'WTF_USE_DEFAULT_RENDER_THEME=1',

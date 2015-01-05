@@ -30,6 +30,10 @@
 #include "platform/image-decoders/webp/WEBPImageDecoder.h"
 #include "wtf/PassOwnPtr.h"
 
+#if ENABLE(JPEGXR)
+#include "platform/image-decoders/jpegxr/JPEGXRImageDecoder.h"
+#endif
+
 namespace blink {
 
 static unsigned copyFromSharedBuffer(char* buffer, unsigned bufferLength, const SharedBuffer& sharedBuffer, unsigned offset)
@@ -61,6 +65,13 @@ inline bool matchesJPEGSignature(char* contents)
 {
     return !memcmp(contents, "\xFF\xD8\xFF", 3);
 }
+
+#if ENABLE(JPEGXR)
+inline bool matchesJPEGXRSignature(char* contents)
+{
+    return !memcmp(contents, "\x49\x49\xBC", 3);
+}
+#endif
 
 inline bool matchesWebPSignature(char* contents)
 {
@@ -104,6 +115,11 @@ PassOwnPtr<ImageDecoder> ImageDecoder::create(const SharedBuffer& data, ImageSou
 
     if (matchesICOSignature(contents) || matchesCURSignature(contents))
         return adoptPtr(new ICOImageDecoder(alphaOption, gammaAndColorProfileOption, maxDecodedBytes));
+
+#if ENABLE(JPEGXR)
+    if (matchesJPEGXRSignature(contents))
+        return adoptPtr(new JPEGXRImageDecoder(alphaOption, gammaAndColorProfileOption, maxDecodedBytes));
+#endif
 
     if (matchesWebPSignature(contents))
         return adoptPtr(new WEBPImageDecoder(alphaOption, gammaAndColorProfileOption, maxDecodedBytes));

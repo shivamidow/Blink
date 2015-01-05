@@ -398,9 +398,11 @@
       ['OS=="linux"', {
         'dependencies': [
           '<(DEPTH)/build/linux/system.gyp:fontconfig',
+          '<(DEPTH)/build/linux/system.gyp:libjxr',
         ],
         'export_dependent_settings': [
           '<(DEPTH)/build/linux/system.gyp:fontconfig',
+          '<(DEPTH)/build/linux/system.gyp:libjxr',
         ],
       }],
       ['use_default_render_theme==0', {
